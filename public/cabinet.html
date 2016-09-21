@@ -4,81 +4,75 @@
     <meta charset="UTF-8"/>
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"/>
+    <link rel="stylesheet" href="css/materialdesignicons.min.css"/>
     <link rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
+<body id="cabinet">
 
-<style>
-    h3 {
-        color: red;
-    }
-    p, ul li {
-        color: green;
-    }
-    b, pre {
-        color: blue
-    }
-</style>
-
-<nav>
-    <div class="nav-wrapper">
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <nav class="grey">
+        <ul id="slide-out" class="side-nav">
             <li><a class="waves-effect waves-light btn modal-trigger" href="./index.html">Main</a></li>
-            <li><a class="waves-effect waves-light btn modal-trigger" href="#" id="login_out">Logout</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger login_out" href="#">Logout</a></li>
         </ul>
-    </div>
-</nav>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons"></i></a>
+        <div class="nav-wrapper">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a class="waves-effect waves-light btn modal-trigger" href="./index.html">Main</a></li>
+                <li><a class="waves-effect waves-light btn modal-trigger login_out" href="#">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col s12 m12 l12 ">
-            <div class="col s6">
-                <div class="row">
-                    <div class="col s10">
-                        <div class="sample z-depth-1">
-                            <h4>Образец</h4>
-                            <p>Абстрактная фабрика похожа на строитель в том смысле, что может конструировать сложные объекты. Основное различие между ними в том, что строитель делает
-                                акцент на пошаговом конструировании объекта, а абстрактная фабрика - на создании семейств объектов (простых или сложных). Строитель возвращает продукт
-                                на последнем шаге, тогда как с точки зрения абстрактной фабрики продукт возвращается немедленно.</p>
-                            <p>Паттерн компоновщик - это то, что часто создает строитель.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12 ">
+                <div class="col s6">
+                    <div class="row">
+                        <div class="col s10">
+                            <div class="sample z-depth-1">
+                                <h4>Sample text:</h4>
+                                <p>Абстрактная фабрика похожа на строитель в том смысле, что может конструировать сложные объекты. Основное различие между ними в том, что строитель делает
+                                    акцент на пошаговом конструировании объекта, а абстрактная фабрика - на создании семейств объектов (простых или сложных). Строитель возвращает продукт
+                                    на последнем шаге, тогда как с точки зрения абстрактной фабрики продукт возвращается немедленно.</p>
+                                <p>Паттерн компоновщик - это то, что часто создает строитель.</p>
+                            </div>
+
                         </div>
-
+                        <div class="col s2"></div>
                     </div>
-                    <div class="col s2"></div>
-                </div>
 
+                </div>
+                <div class="input-field col s6">
+                    <div class="row">
+                        <div class="col s12m12 l12">
+                            <input type="range" min="0" max="100" step="1" value="12" id="fontSize">
+                            <label for="fontSize">Font Size</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12m12 l12">
+                            <select id="text-align">
+                                <option value="0" disabled selected>Text Align</option>
+                                <option value="right">right</option>
+                                <option value="left">left</option>
+                                <option value="justify">justify</option>
+                                <option value="center">center</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12m12 l12"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <a class="waves-effect waves-light green z-depth-2 btn-style" id="commit_changes">Commit changes</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="input-field col s6">
-                <div class="row">
-                    <div class="col s12m12 l12">
-                        <input type="range" min="0" max="100" step="1" value="12" id="fontSize">
-                        <label for="fontSize">Font Size</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12m12 l12">
-                        <select id="text-align">
-                            <option value="0" disabled selected>Text Align</option>
-                            <option value="right">right</option>
-                            <option value="left">left</option>
-                            <option value="justify">justify</option>
-                            <option value="center">center</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12m12 l12"></div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <a class="waves-effect waves-light green z-depth-2 btn-style" id="commit_changes">Commit changes</a>
-                    </div>
-                </div>
-            </div>
-
+        </div>
     </div>
 
-</div>
 
 
 <script type="text/javascript" src="libs/jquery-3.1.0.js"></script>

@@ -1,3 +1,9 @@
+$(document).ready(function() {
+
+    $(".button-collapse").sideNav();
+
+});
+
 $(function () {
     window.App = {
         Models : {},
@@ -74,7 +80,7 @@ $(function () {
         });
     });
 
-    $('#login_out').on('click', function () {
+    $('.login_out').on('click', function () {
         var token = sessionStorage.getItem('token');
         $.ajax('/logout', {
             method: 'post',

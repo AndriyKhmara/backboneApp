@@ -4,17 +4,31 @@
     <meta charset="UTF-8"/>
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"/>
+    <link rel="stylesheet" href="css/materialdesignicons.min.css"/>
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-
-<nav>
+<style></style>
+<nav class="grey">
+    <ul id="slide-out" class="side-nav">
+        <li class="waves-effect waves-light modal-trigger z-depth-1 cabinet"><a href="/cabinet.html">Cabinet</a></li>
+        <li class="waves-effect waves-light modal-trigger z-depth-1 registration_btn"><a href="#modal1">Registration</a></li>
+        <li class="waves-effect waves-light modal-trigger z-depth-1 login-btn"><a href="#modal2">Login</a></li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons"></i></a>
     <div class="nav-wrapper">
+        <ul id="burger">
+            <li>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <button class=""><img src="http://www.shamrocktechnologies.com/images/hamburger.png" height="20px"></button>
+                </a>
+            </li>
+        </ul>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a class="waves-effect waves-light btn modal-trigger" href="./cabinet.html" id="reload">Reload</a></li>
-            <li><a class="waves-effect waves-light btn modal-trigger" href="./cabinet.html" id="cabinet">Cabinet</a></li>
-            <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1" id="registration_btn">Registration</a></li>
-            <li><a class="waves-effect waves-light btn modal-trigger" href="#modal2" id="login-btn">Login</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger cabinet" href="/cabinet.html">Cabinet</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger registration_btn" href="#modal1" >Registration</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger logout-btn" href="#modal2">Logout</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger login-btn" href="#modal2">Login</a></li>
         </ul>
     </div>
 </nav>
@@ -75,7 +89,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onclick="window.backbone.loginUser()">Login</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onclick="window.backbone.loginUser()" id="login-btn-link">Login</a>
     </div>
 </div>
 
@@ -122,7 +136,7 @@
                     <ul>
                         <li>-	задает абстрактный интерфейс для создания частей объекта Product;</li>
                     </ul></li>
-                <li>ConcreteBuilder(ASCIIConverter,TeXConverter,TextWidgetConverter)- конкретный строитель:
+                <li>ConcreteBuilder(ASCIIConverter, TeXConverter, TextWidgetConverter)- конкретный строитель:
                     <ul>
                         <li>-	конструирует и собирает вместе части продукта посредством реализации интерфейса Builder;</li>
                         <li>-	определяет создаваемое представление и следит за ним;</li>
@@ -373,6 +387,14 @@
     </div>
 </div>
 
+<footer class="page-footer grey">
+    <div class="footer-copyright">
+        <div class="container">
+            © 2016 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#">Home</a>
+        </div>
+    </div>
+</footer>
 
 
 

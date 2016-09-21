@@ -1,12 +1,15 @@
 $(document).ready(function(){
 
+    $(".button-collapse").sideNav();
+
     $('.modal-trigger').leanModal();
     
     if (sessionStorage.getItem('token')) {        
         $('#registration_btn').css('display','none');
-        $('#cabinet').css('display','inline-block');        
+        $('.cabinet').css('display','inline-block');        
     } else {
-        $('#registration_btn').css('display','inline-block');
+        $('.registration_btn').css('display','inline-block');
+        $('.login-btn').show();
     }
 });
 
@@ -38,8 +41,10 @@ $(function () {
                 if (data.success) {
                     sessionStorage.setItem('token', data.userToken);
                     sessionStorage.setItem('user_id', data.id);
-                    $('#registration_btn').hide();
-                    $('#cabinet').css('display','inline-block');                    
+                    $('.registration_btn').hide();
+                    $('.cabinet').css('display','inline-block');
+                    $('.login-btn').hide();
+                    $('.logout-btn').css('display','inline-block');
                     loadSetings(sessionStorage.getItem('token'), sessionStorage.getItem('user_id'));
                     Materialize.toast('Login successful !', 3000, 'rounded');
                 }  else {
@@ -89,7 +94,40 @@ $(function () {
             });
         };
 
-        $('#reload').on('click', loadSetings(sessionStorage.getItem('token'), sessionStorage.getItem('user_id')));
+        $('.logout-btn').on('click', function () {
+            var token = sessionStorage.getItem('token');
+            $.ajax('/logout', {
+                method: 'post',
+                data: {
+                    token:token
+                }
+            }).done(function (data) {
+                if (data) {
+                    sessionStorage.removeItem('token');
+                    sessionStorage.removeItem('id');
+                    window.location.href = 'index.html';
+                } {
+                    sessionStorage.removeItem('token');
+                    sessionStorage.removeItem('id');
+                    window.location.href = 'index.html';
+                }
+            });
+        });
+
+        $('.cabinet').on('click', function () {
+            if (sessionStorage.getItem('token')) {
+                console.log('hi cabinet')
+            } else {
+                Materialize.toast(data.message, 3000, 'Login first')
+            }
+        });
+
+
+        $("#pw_user").keyup(function(event){
+            if(event.keyCode == 13){
+                $("#login-btn-link").click();
+            }
+        });
 
         
 
