@@ -1,3 +1,3 @@
-# Backbone App
+# Backbone Task 2
 
-Page of the book, with the ability to change the display settings
+Following the example of the application "65 strings"

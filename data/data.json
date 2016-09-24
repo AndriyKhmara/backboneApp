@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "firstname": "dasda",
+    "lastname": "dfgdfg",
+    "street": "sdfsdf",
+    "number": "123123",
+    "zip": "123123",
+    "email": "Max.Redka@gmail.com"
+  },
+  {
+    "id": 2,
+    "firstname": "Max",
+    "lastname": "Redka",
+    "street": "Soborna",
+    "number": "62-13-82",
+    "zip": "33000",
+    "email": "Max.Redka@gmail.com"
+  },
+  {
+    "id": 3,
+    "firstname": "Max2",
+    "lastname": "Redka2",
+    "street": "Soborna",
+    "number": "62-13-82",
+    "zip": "33000",
+    "email": "Max.Redka@gmail.com"
+  }
+]
