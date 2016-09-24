@@ -40,7 +40,6 @@ module.exports = (function () {
         for (var i = 0; i < dataArr.length; i++) {
             if (dataArr[i].userID == id) {
                 result = dataArr[i];
-                delete result.userID;
             }
         }
         return result;
@@ -115,12 +114,16 @@ module.exports = (function () {
         return result;
     };
 
-    var getData = function (data) {        
-      for (var i = 0; i < session.length; i++) {          
+    var getData = function (data) {
+        var result={};
+        for (var i = 0; i < session.length; i++) {
           if (session[i].userToken == data.token) {
-              return getSettings(data.id);
+              result = getSettings(data.id);
+          } else {
+              result = {};
           }
-      }
+        }
+        return result;
     };
 
     var postData = function (data) {
@@ -178,6 +181,7 @@ module.exports = (function () {
         }
         return false;
     };
+        
 
 
 
@@ -189,6 +193,5 @@ module.exports = (function () {
         getData:getData,
         postData:postData,
         logout:logout
-
 }
 })();

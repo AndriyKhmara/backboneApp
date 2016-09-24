@@ -1,20 +1,21 @@
 $(document).ready(function() {
 
     $(".button-collapse").sideNav();
+    $('select').material_select();
 
 });
 
 $(function () {
-    window.App = {
-        Models : {},
-        Views : {},
-        Collections : {}
-    };
+
+    var App = App || {
+            Models : {},
+            Views : {},
+            Collections : {}
+        };
 
     window.template = function (id) {
         return _.template( $(id).html() );
     };
-
 
     App.Models.StyleModel = Backbone.Model.extend ({
         defaults : {
@@ -26,49 +27,54 @@ $(function () {
         urlRoot : '/getSettings'
     });
 
+    var testModel = new App.Models.StyleModel();
+
     App.Views.StyleView = Backbone.View.extend ({
+
+        el: '#app',
+
         tagName : 'style',
-        
+
         template : template(styleTemplate),
-        
+
+        testModel : testModel,
+
+        initialize: function () {
+
+            this.listenTo(this.testModel, "change", this.render);
+
+            this.render();
+        },
+
         render : function (){
-            var template = this.template(this.model.toJSON());
-            this.$el.html( template );
+            var template = _.template($("#styleTemplate").html());
+            this.$el.html( template (this.testModel.toJSON()) );
             return this;
         }
     });
 
-    var testModel = new App.Models.StyleModel();
-    var testView = new App.Views.StyleView({model : testModel});
-
-
-    $(document.body).append(testView.render().el);
+    new App.Views.StyleView();
 
     $('#fontSize').change(function () {
         var fontSize = $('#fontSize').val() + 'px';
-        testView.model.set({fontSize : fontSize});
-        $(document.body).append(testView.render().el);
-        console.log(testModel.toJSON());
+        testModel.set({fontSize : fontSize});
     });
-
-    $('select').material_select();
 
     $( "#text-align" ).change(function() {
         var textAlign = $( "#text-align option:selected" ).val();
-        testView.model.set({textAlign : textAlign});
-        $(document.body).append(testView.render().el);
+        testModel.set({textAlign : textAlign});
     });
 
     $('#commit_changes').on('click', function () {
         var token = sessionStorage.getItem('token');
-        var id = sessionStorage.getItem('user_id');
-        var settings = testModel.toJSON();        
+        var user_id = sessionStorage.getItem('user_id');
+        var settings = testModel.toJSON();
 
         $.ajax('/postData', {
             method: 'post',
             data: {
                 token:token,
-                id:id,
+                id:user_id,
                 fontFamily:settings.fontFamily,
                 fontSize:settings.fontSize,
                 color:settings.color,
@@ -76,7 +82,7 @@ $(function () {
             }
         }).done(function (data) {
             Materialize.toast(data.message, 3000, 'rounded')
-            
+
         });
     });
 

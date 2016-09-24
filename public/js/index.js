@@ -1,19 +1,4 @@
-$(document).ready(function(){
-
-    $(".button-collapse").sideNav();
-
-    $('.modal-trigger').leanModal();
-    
-    if (sessionStorage.getItem('token')) {        
-        $('#registration_btn').css('display','none');
-        $('.cabinet').css('display','inline-block');        
-    } else {
-        $('.registration_btn').css('display','inline-block');
-        $('.login-btn').show();
-    }
-});
-
-$(function () {
+$(document).ready(function() {
     window.backbone = (function () {
 
         window.App = {
@@ -26,6 +11,48 @@ $(function () {
             return _.template( $(id).html() );
         };
 
+        App.Models.StyleModel = Backbone.Model.extend ({
+            defaults : {
+                'fontFamily' : 'Arial',
+                'fontSize' : '12px',
+                'color' : 'black',
+                'textAlign' : 'justify'
+            }
+        });
+
+        var getUserSettings = function (id) {
+            testModel.fetch(id);
+        };
+
+
+
+        var testModel = new App.Models.StyleModel();
+
+        App.Views.StyleView = Backbone.View.extend ({
+            el: '#app',
+
+            tagName : 'style',
+
+            template : template(styleTemplate),
+
+            testModel: testModel,
+
+            initialize: function () {
+
+                this.listenTo(this.testModel, "change", this.render);
+                this.render();
+
+
+            },
+
+            render : function (){
+                var template = _.template($("#styleTemplate").html());
+                this.$el.html( template (this.testModel.toJSON()) );
+                return this;
+            }
+
+
+        });
 
         var loginUser = function () {
 
@@ -44,8 +71,8 @@ $(function () {
                     $('.registration_btn').hide();
                     $('.cabinet').css('display','inline-block');
                     $('.login-btn').hide();
-                    $('.logout-btn').css('display','inline-block');
-                    loadSetings(sessionStorage.getItem('token'), sessionStorage.getItem('user_id'));
+                    $('.logout-btn').css('display','inline-block');                    
+                    loadSetings(data.userToken, data.id);
                     Materialize.toast('Login successful !', 3000, 'rounded');
                 }  else {
                     Materialize.toast('Login failed !', 3000, 'rounded');
@@ -60,7 +87,7 @@ $(function () {
             var login = $('#login').val();
             var password = $('#password').val();
             var email = $('#email').val();
-            
+
             $.ajax('/registration', {
                 method: 'POST',
                 data: {
@@ -83,14 +110,13 @@ $(function () {
                     id:id
                 }
             }).done(function (data) {
-                var userModel = new App.Models.StyleModel({
+                testModel.set({
                     'fontFamily' : data.fontFamily,
                     'fontSize' : data.fontSize,
                     'color' : data.color,
                     'textAlign' : data.textAlign
                 });
-                var testView = new App.Views.StyleView({model : userModel});
-                $(document.body).append(testView.render().el);
+
             });
         };
 
@@ -116,8 +142,6 @@ $(function () {
 
         $('.cabinet').on('click', function () {
             if (sessionStorage.getItem('token')) {
-                console.log('hi cabinet')
-            } else {
                 Materialize.toast(data.message, 3000, 'Login first')
             }
         });
@@ -129,39 +153,28 @@ $(function () {
             }
         });
 
-        
+        new App.Views.StyleView();
 
-        //----------------------------------------------------------------------------------
+        $(".button-collapse").sideNav();
 
+        $('.modal-trigger').leanModal();
 
-
-
-
-        App.Models.StyleModel = Backbone.Model.extend ({
-            defaults : {
-                'fontFamily' : 'Arial',
-                'fontSize' : '12px',
-                'color' : 'black',
-                'textAlign' : 'justify'
-            }
-        });
-
-        App.Views.StyleView = Backbone.View.extend ({
-            tagName : 'style',
-
-            template : template(styleTemplate),
-
-            render : function (){
-                var template = this.template(this.model.toJSON());
-                this.$el.html( template );
-                return this;
-            }
-        });
+        if (sessionStorage.getItem('token')) {
+            $('#registration_btn').css('display','none');
+            $('.cabinet').css('display','inline-block');
+            $('.login-btn').hide();
+            $('.logout-btn').css('display','inline-block');
+            loadSetings(sessionStorage.getItem('token'), sessionStorage.getItem('user_id'));
+        } else {
+            $('.registration_btn').css('display','inline-block');
+            $('.login-btn').show();
+        }
 
         return {
             loginUser:loginUser,
             registration:registration,
-            loadSetings:loadSetings
+            loadSetings:loadSetings,
+            getUserSettings:getUserSettings
         }
     })();
 });

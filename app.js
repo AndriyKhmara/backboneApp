@@ -15,10 +15,6 @@ app.get('/getSettings', function (req, res) {
     res.send(backboneApp.getSettings());
 });
 
-// app.get('/cabinet', function (req, res) {
-//     res.send(backboneApp.cabinet());
-// });
-
 app.post('/registration', function (req, res) {
     res.send(backboneApp.registration(req.body)) ;
 });

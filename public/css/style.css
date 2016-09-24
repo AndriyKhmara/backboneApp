@@ -84,6 +84,7 @@ label {
     background-color: whitesmoke;
     padding: 0 15px;
 }
+
 @media only screen and (max-width: 600px) {
     nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
         height: 75px;
