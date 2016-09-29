@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<h1>Registration form</h1>
+
+<form>
+    <label for="firstname">FirstName:</label>
+    <input id="firstname" type="text" name="firstname" value="Max"/>
+
+    <label for="lastname">LastName:</label>
+    <input id="lastname" type="text" name="lastname" value="Redka"/>
+
+    <label for="street">Street:</label>
+    <input id="street" type="text" name="street" value="Soborna"/>
+
+    <label for="number">Tel.:</label>
+    <input id="number" type="text" name="number" value="62-13-82"/>
+
+    <label for="zip">ZIP:</label>
+    <input id="zip" type="text" name="zip" size="5" value="33000"/>
+
+    <label for="email">Email:</label>
+    <input id="email" type="email" name="email" value="Max.Redka@gmail.com"/>
+
+    <input class="btn btn-primary" type="submit" value="Submit"/>
+</form>
+<div class="row">
+    <div class="col-lg-12 button-block">
+        <button class="btn btn-warning" id="saveData">save data</button>
+    </div>
+</div>
+
+
+<div id="table"></div>
+
+<script type="text/template" id="tableTemplate">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Street</th>
+            <th>Tel.</th>
+            <th>ZIP</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</script>
+
+<script type="text/template" id="trTemplate">
+    <td><input type="checkbox"></td>
+    <td><%- firstname %></td>
+    <td><%- lastname %></td>
+    <td><%- street %></td>
+    <td><%- number %></td>
+    <td><%- zip %></td>
+    <td><%- email %></td>
+    <td>
+        <span class="glyphicon glyphicon-trash"></span>
+    </td>
+</script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script type="text/javascript" src="js/backbone.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
