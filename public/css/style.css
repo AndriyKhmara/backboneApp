@@ -1,0 +1,93 @@
+body {
+    font-family: Arial;
+}
+p {
+    font-size: 12px;
+    color: black;
+    text-align: justify;
+}
+
+.cabinet, .registration_btn, .reload, .logout-btn {
+    display: none;
+}
+
+#slide-out .cabinet {
+    display: none!important;
+}
+
+#slide-out ul {
+    background-color: #666666 !important;
+}
+
+#slide-out li {
+    width: 100%;
+}
+
+#burger{
+    float:left;
+    background-color:transparent;
+}
+#burger a, #burger a img, #burger a button {
+    background-color:transparent !important;
+    border: none !important;
+}
+
+
+#fontSize {
+    /*padding-top: 25px;*/
+    width: 50%;
+    float: left;
+
+}
+label {
+    float: right;
+}
+
+.some-text {
+    height: 500px;
+}
+
+
+
+.input-field.col label {
+    right: 0 !important;
+    left: auto !important;
+    top: auto !important;
+}
+
+label {
+    margin-top: 10px;
+    padding-right: 10px;
+}
+
+#text-align-label{
+    margin-top: -75px;
+}
+
+.col {
+    text-align: center;
+}
+
+.btn-style {
+    font-size: 25px;
+    line-height: 40px;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 3%;
+}
+
+.padding-top {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.sample {
+    background-color: whitesmoke;
+    padding: 0 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height: 75px;
+    }
+}
+
