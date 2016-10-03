@@ -39,6 +39,25 @@ app.post('/post2', function (req, res) {
     res.send(backboneApp.postPost(req.body)) ;
 });
 
+/**********************************************************************************/
+
+
+app.post('/uploadBook/:id', function (req, res) {
+    res.send(backboneApp.uploadBook(req.body)) ;
+});
+
+app.put('/uploadBook/:id', function (req, res) {
+    res.send(req.body);
+});
+
+app.get('/uploadBook/:id', function (req, res) {
+
+});
+
+app.delete('/uploadBook/:id', function (req, res) {
+    res.send(req.body);
+});
+
 
 
 

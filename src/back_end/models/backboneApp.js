@@ -30,8 +30,11 @@ module.exports = (function () {
         return true;
     };
 
+    var booksPath = './data/books.json';
     var setingsPath = './data/settings.json';   
     var userDataPath = './data/users.json';
+
+    var booksArr = readData(booksPath);
     var dataArr = readData(setingsPath);
     var users = readData(userDataPath);
 
@@ -181,8 +184,21 @@ module.exports = (function () {
         }
         return false;
     };
-        
 
+    var prepareBook = function (book) {
+        return {
+            id      : booksArr.length + 1,
+            book    : book
+        }
+    };
+        
+    var uploadBook = function (data) {
+
+        var preBook = prepareBook(data);
+        booksArr.push(preBook);
+        writeData(booksArr, booksPath);
+        booksArr = readData(booksPath);
+    };
 
 
     return {
@@ -192,6 +208,7 @@ module.exports = (function () {
         login:login,
         getData:getData,
         postData:postData,
-        logout:logout
+        logout:logout,
+        uploadBook:uploadBook
 }
 })();
