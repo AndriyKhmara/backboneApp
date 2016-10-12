@@ -49,6 +49,8 @@ $(function () {
         render : function (){
             var template = _.template($("#styleTemplate").html());
             this.$el.html( template (this.testModel.toJSON()) );
+            console.log('model');
+            console.log(this.testModel.toJSON());
             return this;
         }
     });
@@ -119,14 +121,14 @@ $(function () {
                 data:book
             }
         }).done(function (data) {
-            console.log(data);
+            /*console.log(data);*/
             $('#sampleLoadBook').html(data.data);
             $('#outputText').val(data.data);
         });
 
 
 
-    })
+    });
 
 
 });

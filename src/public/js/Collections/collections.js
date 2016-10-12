@@ -1,8 +1,10 @@
 var app = app || {};
 
-app.TestCollection = Backbone.Collection.extend({
+app.BookCollection = Backbone.Collection.extend({
 
-    model: app.TestModel,
+    model: app.BookModel,
 
-    url: '/data'
+    url: function () {
+            return '/uploadBook/' + (this.id ? this.id : 0);
+        }
 });

@@ -42,23 +42,22 @@ app.post('/post2', function (req, res) {
 /**********************************************************************************/
 
 
-app.post('/uploadBook/:id', function (req, res) {
-    res.send(backboneApp.uploadBook(req.body)) ;
-});
-
-app.put('/uploadBook/:id', function (req, res) {
-    res.send(req.body);
-});
+// app.post('/uploadBook/:id', function (req, res) {
+//     res.send(backboneApp.uploadBook(req.body));
+// });
+//
+// app.put('/uploadBook/:id', function (req, res) {
+//     res.send(req.body);
+// });
 
 app.get('/uploadBook/:id', function (req, res) {
-
+    
+    res.send(backboneApp.getBooks(req.headers));
 });
 
-app.delete('/uploadBook/:id', function (req, res) {
-    res.send(req.body);
-});
-
-
+// app.delete('/uploadBook/:id', function (req, res) {
+//     res.send(req.body);
+// });
 
 
 http.createServer(app).listen(3000, function () {

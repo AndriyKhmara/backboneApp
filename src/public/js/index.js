@@ -170,11 +170,25 @@ $(document).ready(function() {
             $('.login-btn').show();
         }
 
+        //****************************************************************************************
+
+        new app.testView();
+
+
+
+
+
+        var loadBook = function () {
+            // var neededBook = bookCollection.get(2)
+            
+        };
+
         return {
             loginUser:loginUser,
             registration:registration,
             loadSetings:loadSetings,
-            getUserSettings:getUserSettings
+            getUserSettings:getUserSettings,
+            loadBook:loadBook
         }
     })();
 });

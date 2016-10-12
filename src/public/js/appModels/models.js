@@ -1,9 +1,9 @@
 var app = app || {};
 
-app.TestModel = Backbone.Model.extend({
+app.BookModel = Backbone.Model.extend({
     //url: '/data/' + this.id    
 
-    url: function () {
-        return '/uploadBook/' + (this.id ? this.id : 0);
-    }
+    // url: function () {
+    //     return '/uploadBook/' + (this.id ? this.id : 0);
+    // }
 });

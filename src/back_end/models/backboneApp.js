@@ -200,6 +200,14 @@ module.exports = (function () {
         booksArr = readData(booksPath);
     };
 
+    var getBooks = function (data) {
+        var a = [];
+        a.push(booksArr[0].book);
+        a.push(booksArr[1].book);
+        
+        return a;
+    };
+
 
     return {
         getSettings:getSettings,
@@ -209,6 +217,7 @@ module.exports = (function () {
         getData:getData,
         postData:postData,
         logout:logout,
-        uploadBook:uploadBook
+        uploadBook:uploadBook,
+        getBooks:getBooks
 }
 })();
