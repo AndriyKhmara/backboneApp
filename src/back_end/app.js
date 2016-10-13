@@ -41,21 +41,29 @@ app.post('/post2', function (req, res) {
 
 /**********************************************************************************/
 
+app.post('/uploadNewBook', function (req, res) {
+    
+    backboneApp.authorize(req, res, function () {
+        return backboneApp.uploadBook(req.body, req.headers.userid);
+    });
+});
 
-// app.post('/uploadBook/:id', function (req, res) {
+
+// app.post('/downloadBook/:id', function (req, res) {
 //     res.send(backboneApp.uploadBook(req.body));
 // });
 //
-// app.put('/uploadBook/:id', function (req, res) {
+// app.put('/downloadBook/:id', function (req, res) {
 //     res.send(req.body);
 // });
 
-app.get('/uploadBook/:id', function (req, res) {
-    
-    res.send(backboneApp.getBooks(req.headers));
+app.get('/downloadBook/:id', function (req, res) {
+    backboneApp.authorize(req, res, function () {
+        return backboneApp.getBooks(req.headers.userid);
+    });
 });
 
-// app.delete('/uploadBook/:id', function (req, res) {
+// app.delete('/downloadBook/:id', function (req, res) {
 //     res.send(req.body);
 // });
 

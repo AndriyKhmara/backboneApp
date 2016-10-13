@@ -3,7 +3,7 @@ var logger = require('./../services/logger.js');
 
 module.exports = (function () {
 
-    var session = [];
+    var sessions = [];
 
     var readData = function (path) {
         try {
@@ -62,7 +62,8 @@ module.exports = (function () {
             last_name:data.last_name,
             login:data.login,
             password:data.password,
-            email:data.email
+            email:data.email,
+            booksInStorage:[]
         };
 
         try {
@@ -97,7 +98,7 @@ module.exports = (function () {
             var result = {};
             if (data.login == users[i].login && data.pw == users[i].password) {
                 var token = generateToken();
-                session.push({
+                sessions.push({
                     userToken : token,
                     userName : users[i].login
                 });
@@ -119,8 +120,8 @@ module.exports = (function () {
 
     var getData = function (data) {
         var result={};
-        for (var i = 0; i < session.length; i++) {
-          if (session[i].userToken == data.token) {
+        for (var i = 0; i < sessions.length; i++) {
+          if (sessions[i].userToken == data.token) {
               result = getSettings(data.id);
           } else {
               result = {};
@@ -132,8 +133,8 @@ module.exports = (function () {
     var postData = function (data) {
         var dataArr2 = readData(setingsPath);
 
-        for (var i = 0; i < session.length; i++) {
-            if (session[i].userToken == data.token) {
+        for (var i = 0; i < sessions.length; i++) {
+            if (sessions[i].userToken == data.token) {
                 var preData = {
                     id: dataArr.length + 1,
                     userID: data.id,
@@ -176,9 +177,9 @@ module.exports = (function () {
     };
 
     var logout = function (data) {
-        for (var i = 0; i < session.length; i++) {
-            if (session[i].userToken == data.token) {
-                session.splice(i, 1);
+        for (var i = 0; i < sessions.length; i++) {
+            if (sessions[i].userToken == data.token) {
+                sessions.splice(i, 1);
                 return true;
             }
         }
@@ -192,21 +193,72 @@ module.exports = (function () {
         }
     };
         
-    var uploadBook = function (data) {
+    var uploadBook = function (book, userID) {
 
-        var preBook = prepareBook(data);
+        var preBook = prepareBook(book);
+        for(var i = 0; i < users.length; ++i) {
+
+            if (users[i].id == userID ) {
+                users[i].booksInStorage.push(preBook.id);
+            }
+        }
         booksArr.push(preBook);
         writeData(booksArr, booksPath);
         booksArr = readData(booksPath);
+        writeData(users, userDataPath);
+        users = readData(userDataPath);
     };
 
-    var getBooks = function (data) {
-        var a = [];
-        a.push(booksArr[0].book);
-        a.push(booksArr[1].book);
-        
-        return a;
+    var searchBooks = function (id){
+        var userBooks = [];
+        for (var j = 0; j < booksArr.length; j++) {
+            for (var i = 0; i < id.length; i++) {
+                if (booksArr[j].id == id[i]) {
+                    userBooks.push(booksArr[j].book);
+                }
+            }
+        }
+        return userBooks;
     };
+
+    var getBooks = function (userID) {
+        var userBooks = [];
+        for(var i = 0; i < users.length; ++i) {
+
+            if (users[i].id == userID ) {
+                userBooks = searchBooks(users[i].booksInStorage)
+            }
+        }        
+        return userBooks;
+    };
+
+    var hasSession = function (token, executable) {
+        var session = null;
+        for (var i = 0; i < sessions.length; ++i) {
+            if (sessions[i].userToken === token) {
+                session = sessions[i];
+            }
+        }
+        if (session) {
+            executable();
+        } else {
+            throw { status: 401 };
+        }
+    };
+
+    var authorize = function (req, res, executable) {
+        try {
+            hasSession(req.headers.token, function () {
+                res.send(executable());
+            });
+        } catch (error) {
+            logger.logError("Coudn't authorize user with token: " + req.headers.token);
+            console.log("Coudn't authorize user with token: " + req.headers.token);
+            res.statusCode = error.status;
+            res.send();
+        }
+    };
+
 
 
     return {
@@ -218,6 +270,7 @@ module.exports = (function () {
         postData:postData,
         logout:logout,
         uploadBook:uploadBook,
-        getBooks:getBooks
+        getBooks:getBooks,
+        authorize:authorize
 }
 })();

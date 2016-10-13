@@ -24,9 +24,9 @@ $(document).ready(function() {
             testModel.fetch(id);
         };
 
-
-
         var testModel = new App.Models.StyleModel();
+        new app.testView();
+        
 
         App.Views.StyleView = Backbone.View.extend ({
             el: '#app',
@@ -54,6 +54,11 @@ $(document).ready(function() {
 
         });
 
+        var setHeader = function (xhr, token){
+            xhr.setRequestHeader('token', sessionStorage.getItem('token'));
+            xhr.setRequestHeader('userID', sessionStorage.getItem('user_id'));
+        };
+
         var loginUser = function () {
 
             var user_login = $('#login_user').val();
@@ -73,6 +78,10 @@ $(document).ready(function() {
                     $('.login-btn').hide();
                     $('.logout-btn').css('display','inline-block');                    
                     loadSetings(data.userToken, data.id);
+                    userBookCollection.fetch({
+                        beforeSend : setHeader
+                    });
+                    console.log(userBookCollection);
                     Materialize.toast('Login successful !', 3000, 'rounded');
                 }  else {
                     Materialize.toast('Login failed !', 3000, 'rounded');
@@ -165,6 +174,10 @@ $(document).ready(function() {
             $('.login-btn').hide();
             $('.logout-btn').css('display','inline-block');
             loadSetings(sessionStorage.getItem('token'), sessionStorage.getItem('user_id'));
+            userBookCollection.fetch({
+                beforeSend : setHeader
+            });
+
         } else {
             $('.registration_btn').css('display','inline-block');
             $('.login-btn').show();
@@ -172,23 +185,19 @@ $(document).ready(function() {
 
         //****************************************************************************************
 
-        new app.testView();
 
-
-
-
-
-        var loadBook = function () {
-            // var neededBook = bookCollection.get(2)
-            
+        var renderNavEl = function (idEl) {
+            console.log(idEl);
         };
+
 
         return {
             loginUser:loginUser,
             registration:registration,
             loadSetings:loadSetings,
             getUserSettings:getUserSettings,
-            loadBook:loadBook
+            renderNavEl:renderNavEl,
+            setHeader:setHeader
         }
     })();
 });

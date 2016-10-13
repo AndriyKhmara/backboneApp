@@ -111,12 +111,9 @@ $(function () {
     $('#loadBook').on('click', function () {
         var book = $('#textarea1').val();
 
-        // var text = document.getElementById('textarea1').innerHTML;
-        // document.getElementById('sampleLoadBook').innerHTML = text;
-        // console.log(text);
-
-        $.ajax('/uploadBook', {
+        $.ajax('/uploadNewBook', {
             method: 'post',
+            beforeSend:window.backbone.setHeader,
             data: {
                 data:book
             }
