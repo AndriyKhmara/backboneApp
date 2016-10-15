@@ -48,25 +48,11 @@ app.post('/uploadNewBook', function (req, res) {
     });
 });
 
-
-// app.post('/downloadBook/:id', function (req, res) {
-//     res.send(backboneApp.uploadBook(req.body));
-// });
-//
-// app.put('/downloadBook/:id', function (req, res) {
-//     res.send(req.body);
-// });
-
 app.get('/downloadBook/:id', function (req, res) {
     backboneApp.authorize(req, res, function () {
         return backboneApp.getBooks(req.headers.userid);
     });
 });
-
-// app.delete('/downloadBook/:id', function (req, res) {
-//     res.send(req.body);
-// });
-
 
 http.createServer(app).listen(3000, function () {
     console.log('App listening on port 3000!');
