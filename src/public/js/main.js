@@ -49,6 +49,8 @@ $(function () {
         render : function (){
             var template = _.template($("#styleTemplate").html());
             this.$el.html( template (this.testModel.toJSON()) );
+            console.log('model');
+            console.log(this.testModel.toJSON());
             return this;
         }
     });
@@ -104,6 +106,25 @@ $(function () {
                 window.location.href = 'index.html';
             }
         });
+    });
+
+    $('#loadBook').on('click', function () {
+        var book = $('#textarea1').val();
+
+        $.ajax('/uploadNewBook', {
+            method: 'post',
+            beforeSend:window.backbone.setHeader,
+            data: {
+                data:book
+            }
+        }).done(function (data) {
+            /*console.log(data);*/
+            $('#sampleLoadBook').html(data.data);
+            $('#outputText').val(data.data);
+        });
+
+
+
     });
 
 

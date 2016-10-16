@@ -39,8 +39,20 @@ app.post('/post2', function (req, res) {
     res.send(backboneApp.postPost(req.body)) ;
 });
 
+/**********************************************************************************/
 
+app.post('/uploadNewBook', function (req, res) {
+    
+    backboneApp.authorize(req, res, function () {
+        return backboneApp.uploadBook(req.body, req.headers.userid);
+    });
+});
 
+app.get('/downloadBook/:id', function (req, res) {
+    backboneApp.authorize(req, res, function () {
+        return backboneApp.getBooks(req.headers.userid);
+    });
+});
 
 http.createServer(app).listen(3000, function () {
     console.log('App listening on port 3000!');

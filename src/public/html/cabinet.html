@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"/>
-    <link rel="stylesheet" href="css/materialdesignicons.min.css"/>
+    <link rel="stylesheet" href="libs/materialdesignicons.min.css"/>
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body id="cabinet">
@@ -22,14 +22,13 @@
             </ul>
         </div>
     </nav>
-
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12 ">
                 <div class="col s6">
                     <div class="row">
                         <div class="col s10">
-                            <div class="sample z-depth-1">
+                            <div class="sample z-depth-1" id="test">
                                 <h4>Sample text:</h4>
                                 <p>Абстрактная фабрика похожа на строитель в том смысле, что может конструировать сложные объекты. Основное различие между ними в том, что строитель делает
                                     акцент на пошаговом конструировании объекта, а абстрактная фабрика - на создании семейств объектов (простых или сложных). Строитель возвращает продукт
@@ -41,8 +40,15 @@
                         <div class="col s2"></div>
                     </div>
 
+
+
                 </div>
                 <div class="input-field col s6">
+
+                    <div class="row">
+                        <div id="sampleLoadBook"></div>
+                    </div>
+
                     <div class="row">
                         <div class="col s12m12 l12">
                             <input type="range" min="0" max="100" step="1" value="12" id="fontSize">
@@ -66,6 +72,16 @@
                             <a class="waves-effect waves-light green z-depth-2 btn-style" id="commit_changes">Commit changes</a>
                         </div>
                     </div>
+
+
+
+                    <div class="row z-depth-2">
+                        <div class="waves-effect waves-light btn" id="loadBook">Upload new book</div>
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea"></textarea>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,7 +95,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script type="text/javascript" src="libs/backbone.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/bundle.js"></script>
 <script type="text/template" id="styleTemplate">
         p {
             font-family: <%- fontFamily %>;

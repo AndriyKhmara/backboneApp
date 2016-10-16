@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"/>
+    <link rel="stylesheet" href="libs/materialdesignicons.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<nav class="grey">
+    <ul id="slide-out" class="side-nav">
+        <li class="waves-effect waves-light modal-trigger z-depth-1 cabinet"><a href="/cabinet.html">Cabinet</a></li>
+        <li class="waves-effect waves-light modal-trigger z-depth-1 registration_btn"><a href="#modal1">Registration</a></li>
+        <li class="waves-effect waves-light modal-trigger z-depth-1 login-btn"><a href="#modal2">Login</a></li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons"></i></a>
+    <div class="nav-wrapper">
+        <ul id="burger">
+            <li>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <button class=""><img src="http://www.shamrocktechnologies.com/images/hamburger.png" height="20px"></button>
+                </a>
+            </li>
+        </ul>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a class="waves-effect waves-light btn modal-trigger cabinet" href="/cabinet.html">Cabinet</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger registration_btn" href="#modal1" >Registration</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger logout-btn" href="#modal2">Logout</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger login-btn" href="#modal2">Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" type="text" class="validate">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="login" type="text" class="validate">
+                        <label for="login">Login</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat" onclick="window.backbone.registration()">Check in</a>
+    </div>
+</div>
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="login_user" type="text" class="validate">
+                        <label for="login_user">Login</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="pw_user" type="text" class="validate">
+                        <label for="pw_user">Password</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" onclick="window.backbone.loginUser()" id="login-btn-link">Login</a>
+    </div>
+</div>
+
+    <div class="row">
+        <div class="col s11 m11 l11">
+
+
+            <div id="book_content"></div>
+        </div>
+        <div class="col s1 m1 l1 right_col">
+            <div class="books_navigation">
+
+            </div>
+        </div>
+    </div>
+
+
+
+<style id="app"></style>
+
+<footer class="page-footer grey">
+    <div class="footer-copyright">
+        <div class="container">
+            © 2016 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#">Home</a>
+        </div>
+    </div>
+</footer>
+
+
+
+<script type="text/javascript" src="libs/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script type="text/javascript" src="libs/backbone.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<script type="text/javascript" src="js/bundle.js"></script>
+<!--<script type="text/javascript" src="js/test.js"></script>-->
+
+<script type="text/template" id="readBookTemplate">
+    <%        var i = 0;        collection.forEach( function (item) {            %> <%= item.book %>           <% window.backbone.renderNavEl(i);            i++;  %>      <%});    %>
+</script>
+<script type="text/template" id="styleTemplate">
+    p {
+    font-family: <%- fontFamily %>;
+    font-size: <%- fontSize %>;
+    color : <%- color %>;
+    text-align: <%- textAlign %>;
+    }
+    body {
+
+    }
+</script>
+
+</body>
+</html>
